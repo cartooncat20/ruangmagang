@@ -5,25 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RuangMagang.id - Portal Tempat PKL & Magang Siswa SMK</title>
   <style>
-    /* RESET & VARIASE DASAR */
+    /* RESET & VARIABEL DASAR */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       background-color: #f4f6f9;
       color: #333;
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* NAVBAR */
+    /* NAVBAR RESPONSIF */
     header {
       background-color: #0d6efd;
       color: #fff;
-      padding: 1rem 2rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -34,7 +38,7 @@
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: bold;
     }
 
@@ -42,65 +46,77 @@
       color: #ffc107;
     }
 
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
     nav a {
       color: #fff;
       text-decoration: none;
-      margin-left: 1.5rem;
       font-weight: 500;
       cursor: pointer;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: background 0.2s;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    nav a:hover, nav a.active {
+      background: rgba(255, 255, 255, 0.15);
     }
 
     /* CONTAINER UTAMA */
     .container {
       max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      flex: 1;
     }
 
     /* HERO SECTION */
     .hero {
       background: linear-gradient(135deg, #0d6efd, #0b5ed7);
       color: white;
-      padding: 3rem 2rem;
+      padding: 2.5rem 1.5rem;
       border-radius: 12px;
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       margin-bottom: 0.5rem;
+      line-height: 1.3;
     }
 
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       opacity: 0.9;
     }
 
-    /* PENCARIAN & FILTER */
+    /* PENCARIAN & FILTER RESPONSIF */
     .search-section {
       background: #fff;
-      padding: 1.5rem;
+      padding: 1.2rem;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
     }
 
     .search-section input,
     .search-section select {
       width: 100%;
-      padding: 0.8rem;
+      padding: 0.8rem 1rem;
       border: 1px solid #ced4da;
-      border-radius: 6px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 1rem; /* Mencegah auto-zoom di iOS */
       outline: none;
+      background-color: #fff;
     }
 
     .search-section input:focus,
@@ -108,17 +124,17 @@
       border-color: #0d6efd;
     }
 
-    /* DAFTAR LOWONGAN (GRID) */
+    /* DAFTAR LOWONGAN (GRID RESPONSIF) */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
     }
 
     .card {
       background: #fff;
       border-radius: 10px;
-      padding: 1.5rem;
+      padding: 1.2rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
@@ -127,30 +143,29 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    }
-
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 0.8rem;
+      gap: 0.5rem;
     }
 
     .company-name {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #0d6efd;
+      line-height: 1.3;
     }
 
     .bookmark-btn {
       background: none;
       border: none;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       cursor: pointer;
       color: #ccc;
+      padding: 0 0.2rem;
+      line-height: 1;
     }
 
     .bookmark-btn.active {
@@ -167,9 +182,9 @@
     .badge {
       background-color: #e7f1ff;
       color: #0d6efd;
-      padding: 0.2rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
       font-weight: 600;
     }
 
@@ -182,7 +197,7 @@
     .card-desc {
       font-size: 0.9rem;
       color: #555;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .card-footer {
@@ -192,6 +207,7 @@
       margin-top: auto;
       padding-top: 0.8rem;
       border-top: 1px solid #eee;
+      gap: 0.5rem;
     }
 
     .quota {
@@ -204,47 +220,91 @@
       background-color: #25d366;
       color: #fff;
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
       font-size: 0.85rem;
       font-weight: bold;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: background 0.2s;
     }
 
-    .btn-apply:hover {
+    .btn-apply:active {
       background-color: #1eb857;
     }
 
     .empty-state {
       text-align: center;
       grid-column: 1 / -1;
-      padding: 3rem;
+      padding: 3rem 1rem;
       color: #6c757d;
     }
 
     /* FOOTER */
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem 1rem;
       background: #343a40;
       color: #fff;
-      margin-top: 4rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      margin-top: auto;
     }
 
-    /* RESPONSIVE */
+    /* MEDIA QUERIES (TAMPILAN PONSEL & TABLET) */
     @media (max-width: 768px) {
-      .search-section {
-        grid-template-columns: 1fr;
-      }
       header {
         flex-direction: column;
+        padding: 0.8rem 1rem;
         gap: 0.8rem;
       }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+      }
+
       nav a {
-        margin: 0 0.5rem;
+        font-size: 0.88rem;
+        padding: 0.4rem 0.6rem;
+      }
+
+      .hero {
+        padding: 1.8rem 1rem;
+        border-radius: 10px;
+      }
+
+      .hero h1 {
+        font-size: 1.4rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .search-section {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr; /* 1 Kolom penuh di ponsel */
+      }
+
+      .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+      }
+
+      .quota {
+        text-align: center;
+      }
+
+      .btn-apply {
+        width: 100%;
+        padding: 0.75rem;
       }
     }
   </style>
@@ -255,28 +315,28 @@
   <header>
     <div class="logo">RuangMagang<span>.id</span></div>
     <nav>
-      <a onclick="filterView('all')">Cari PKL</a>
-      <a onclick="filterView('saved')">Simpanan Saya (<span id="saved-count">0</span>)</a>
+      <a id="nav-all" class="active" onclick="filterView('all')">Cari PKL</a>
+      <a id="nav-saved" onclick="filterView('saved')">Simpanan (<span id="saved-count">0</span>)</a>
     </nav>
   </header>
 
   <div class="container">
     <!-- HERO -->
     <section class="hero">
-      <h1>Temukan Tempat PKL Terbaik untuk Kelas 11</h1>
-      <p>Cari lowongan magang berdasarkan jurusan SMK Anda dan langsung hubungi perusahaan!</p>
+      <h1>Temukan Tempat PKL Kelas 11</h1>
+      <p>Cari tempat magang sesuai jurusan SMK Anda dan langsung ajukan via WhatsApp!</p>
     </section>
 
     <!-- SEARCH & FILTER -->
     <section class="search-section">
-      <input type="text" id="search-input" placeholder="Cari nama perusahaan atau kata kunci..." oninput="renderCards()">
+      <input type="text" id="search-input" placeholder="Cari perusahaan atau kata kunci..." oninput="renderCards()">
       <select id="filter-jurusan" onchange="renderCards()">
         <option value="Semua">Semua Jurusan</option>
-        <option value="RPL">RPL (Rekayasa Perangkat Lunak)</option>
-        <option value="TKJ">TKJ (Teknik Komputer & Jaringan)</option>
-        <option value="AKL">AKL (Akuntansi & Keuangan)</option>
-        <option value="OTKP">OTKP (Otomatisasi Perkantoran)</option>
-        <option value="TKR">TKR (Teknik Kendaraan Ringan)</option>
+        <option value="RPL">RPL (Perangkat Lunak)</option>
+        <option value="TKJ">TKJ (Jaringan)</option>
+        <option value="AKL">AKL (Akuntansi)</option>
+        <option value="OTKP">OTKP (Perkantoran)</option>
+        <option value="TKR">TKR (Otomotif)</option>
       </select>
       <select id="filter-kota" onchange="renderCards()">
         <option value="Semua">Semua Kota</option>
@@ -286,18 +346,17 @@
       </select>
     </section>
 
-    <!-- CONTAINER DOKUMEN/CARDS -->
+    <!-- CONTAINER CARDS -->
     <main id="pkl-grid" class="grid-container"></main>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 RuangMagang.id - Platform Pencari PKL Siswa SMK. Dipublikasikan via GitHub Pages.</p>
+    <p>&copy; 2026 RuangMagang.id - Platform PKL Siswa SMK.</p>
   </footer>
 
   <!-- JAVASCRIPT -->
   <script>
-    // 1. DATABASE DUMMY LOWONGAN PKL
     const pklData = [
       {
         id: "pkl-001",
@@ -346,10 +405,8 @@
       }
     ];
 
-    // Status Tampilan Saat Ini ('all' atau 'saved')
     let currentView = 'all';
 
-    // 2. FUNGSI RENDER CARDS KE LAYAR
     function renderCards() {
       const grid = document.getElementById('pkl-grid');
       const searchKeyword = document.getElementById('search-input').value.toLowerCase();
@@ -359,7 +416,6 @@
       const savedIDs = getSavedIDs();
       updateSavedCount(savedIDs.length);
 
-      // Filter Data
       const filteredData = pklData.filter(item => {
         const matchKeyword = item.namaPerusahaan.toLowerCase().includes(searchKeyword) || 
                              item.deskripsi.toLowerCase().includes(searchKeyword);
@@ -370,7 +426,6 @@
         return matchKeyword && matchJurusan && matchKota && matchSaved;
       });
 
-      // Jika data kosong
       if (filteredData.length === 0) {
         grid.innerHTML = `
           <div class="empty-state">
@@ -381,7 +436,6 @@
         return;
       }
 
-      // Generate HTML
       grid.innerHTML = filteredData.map(item => {
         const isSaved = savedIDs.includes(item.id);
         const waMessage = encodeURIComponent(`Halo ${item.namaPerusahaan}, saya siswa kelas 11 SMK yang ingin menanyakan lowongan PKL/Magang untuk jurusan ${item.jurusan.join('/')}. Apakah masih ada kuota yang tersedia?`);
@@ -415,7 +469,6 @@
       }).join('');
     }
 
-    // 3. FUNGSI LOCALSTORAGE (SIMPAN LOWONGAN)
     function getSavedIDs() {
       return JSON.parse(localStorage.getItem('savedPKL')) || [];
     }
@@ -437,10 +490,11 @@
 
     function filterView(view) {
       currentView = view;
+      document.getElementById('nav-all').classList.toggle('active', view === 'all');
+      document.getElementById('nav-saved').classList.toggle('active', view === 'saved');
       renderCards();
     }
 
-    // RENDER PERTAMA KALI SAAT HALAMAN DIMUAT
     window.onload = renderCards;
   </script>
 </body>
