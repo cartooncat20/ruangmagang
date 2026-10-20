@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RuangMagang.id - Portal Tempat PKL & Magang Siswa SMK</title>
+  <style>
+    /* RESET & VARIASE DASAR */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    header {
+      background-color: #0d6efd;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #ffc107;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTAINER UTAMA */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* PENCARIAN & FILTER */
+    .search-section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-section input,
+    .search-section select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-section input:focus,
+    .search-section select:focus {
+      border-color: #0d6efd;
+    }
+
+    /* DAFTAR LOWONGAN (GRID) */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+    }
+
+    .company-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0d6efd;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .bookmark-btn.active {
+      color: #dc3545;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      background-color: #e7f1ff;
+      color: #0d6efd;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-location {
+      background-color: #f8f9fa;
+      color: #6c757d;
+      border: 1px solid #dee2e6;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid #eee;
+    }
+
+    .quota {
+      font-size: 0.85rem;
+      color: #28a745;
+      font-weight: 600;
+    }
+
+    .btn-apply {
+      background-color: #25d366;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-apply:hover {
+      background-color: #1eb857;
+    }
+
+    .empty-state {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 3rem;
+      color: #6c757d;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #343a40;
+      color: #fff;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .search-section {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      nav a {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo">RuangMagang<span>.id</span></div>
+    <nav>
+      <a onclick="filterView('all')">Cari PKL</a>
+      <a onclick="filterView('saved')">Simpanan Saya (<span id="saved-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Temukan Tempat PKL Terbaik untuk Kelas 11</h1>
+      <p>Cari lowongan magang berdasarkan jurusan SMK Anda dan langsung hubungi perusahaan!</p>
+    </section>
+
+    <!-- SEARCH & FILTER -->
+    <section class="search-section">
+      <input type="text" id="search-input" placeholder="Cari nama perusahaan atau kata kunci..." oninput="renderCards()">
+      <select id="filter-jurusan" onchange="renderCards()">
+        <option value="Semua">Semua Jurusan</option>
+        <option value="RPL">RPL (Rekayasa Perangkat Lunak)</option>
+        <option value="TKJ">TKJ (Teknik Komputer & Jaringan)</option>
+        <option value="AKL">AKL (Akuntansi & Keuangan)</option>
+        <option value="OTKP">OTKP (Otomatisasi Perkantoran)</option>
+        <option value="TKR">TKR (Teknik Kendaraan Ringan)</option>
+      </select>
+      <select id="filter-kota" onchange="renderCards()">
+        <option value="Semua">Semua Kota</option>
+        <option value="Bandung">Bandung</option>
+        <option value="Jakarta">Jakarta</option>
+        <option value="Surabaya">Surabaya</option>
+      </select>
+    </section>
+
+    <!-- CONTAINER DOKUMEN/CARDS -->
+    <main id="pkl-grid" class="grid-container"></main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 RuangMagang.id - Platform Pencari PKL Siswa SMK. Dipublikasikan via GitHub Pages.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // 1. DATABASE DUMMY LOWONGAN PKL
+    const pklData = [
+      {
+        id: "pkl-001",
+        namaPerusahaan: "PT Digital Nusantara",
+        jurusan: ["RPL", "TKJ"],
+        kota: "Bandung",
+        deskripsi: "Membantu pengembangan frontend web dan perbaikan jaringan komputer kantor.",
+        kuota: 3,
+        kontakWA: "6281234567890"
+      },
+      {
+        id: "pkl-002",
+        namaPerusahaan: "Klinik Akuntansi Mandiri",
+        jurusan: ["AKL", "OTKP"],
+        kota: "Jakarta",
+        deskripsi: "Pengolahan data keuangan bulanan dan rekapitulasi dokumen administrasi.",
+        kuota: 2,
+        kontakWA: "6289876543210"
+      },
+      {
+        id: "pkl-003",
+        namaPerusahaan: "Bengkel Auto Jaya",
+        jurusan: ["TKR"],
+        kota: "Surabaya",
+        deskripsi: "Praktik servis rutin kendaraan roda empat dan diagnosa kelistrikan mobil.",
+        kuota: 4,
+        kontakWA: "6285678901234"
+      },
+      {
+        id: "pkl-004",
+        namaPerusahaan: "Studio Solusi Media",
+        jurusan: ["RPL"],
+        kota: "Bandung",
+        deskripsi: "Pembuatan landing page sederhana menggunakan HTML, CSS, dan JavaScript.",
+        kuota: 2,
+        kontakWA: "6281122334455"
+      },
+      {
+        id: "pkl-005",
+        namaPerusahaan: "Kantor Notaris Sejahtera",
+        jurusan: ["OTKP", "AKL"],
+        kota: "Jakarta",
+        deskripsi: "Penyusunan arsip digital, surat-menyurat, dan manajemen berkas klien.",
+        kuota: 1,
+        kontakWA: "6287788990011"
+      }
+    ];
+
+    // Status Tampilan Saat Ini ('all' atau 'saved')
+    let currentView = 'all';
+
+    // 2. FUNGSI RENDER CARDS KE LAYAR
+    function renderCards() {
+      const grid = document.getElementById('pkl-grid');
+      const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+      const selectedJurusan = document.getElementById('filter-jurusan').value;
+      const selectedKota = document.getElementById('filter-kota').value;
+      
+      const savedIDs = getSavedIDs();
+      updateSavedCount(savedIDs.length);
+
+      // Filter Data
+      const filteredData = pklData.filter(item => {
+        const matchKeyword = item.namaPerusahaan.toLowerCase().includes(searchKeyword) || 
+                             item.deskripsi.toLowerCase().includes(searchKeyword);
+        const matchJurusan = selectedJurusan === "Semua" || item.jurusan.includes(selectedJurusan);
+        const matchKota = selectedKota === "Semua" || item.kota === selectedKota;
+        const matchSaved = currentView === 'all' || savedIDs.includes(item.id);
+
+        return matchKeyword && matchJurusan && matchKota && matchSaved;
+      });
+
+      // Jika data kosong
+      if (filteredData.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>Lowongan tidak ditemukan</h3>
+            <p>Coba ubah kata kunci atau filter pencarian Anda.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Generate HTML
+      grid.innerHTML = filteredData.map(item => {
+        const isSaved = savedIDs.includes(item.id);
+        const waMessage = encodeURIComponent(`Halo ${item.namaPerusahaan}, saya siswa kelas 11 SMK yang ingin menanyakan lowongan PKL/Magang untuk jurusan ${item.jurusan.join('/')}. Apakah masih ada kuota yang tersedia?`);
+        
+        return `
+          <div class="card">
+            <div>
+              <div class="card-header">
+                <div class="company-name">${item.namaPerusahaan}</div>
+                <button class="bookmark-btn ${isSaved ? 'active' : ''}" onclick="toggleSave('${item.id}')">
+                  ${isSaved ? '♥' : '♡'}
+                </button>
+              </div>
+              
+              <div class="badges">
+                ${item.jurusan.map(j => `<span class="badge">${j}</span>`).join('')}
+                <span class="badge badge-location">📍 ${item.kota}</span>
+              </div>
+              
+              <p class="card-desc">${item.deskripsi}</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="quota">Sisa Kuota: ${item.kuota} Orang</span>
+              <a href="https://wa.me/${item.kontakWA}?text=${waMessage}" target="_blank" class="btn-apply">
+                Melamar via WA
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. FUNGSI LOCALSTORAGE (SIMPAN LOWONGAN)
+    function getSavedIDs() {
+      return JSON.parse(localStorage.getItem('savedPKL')) || [];
+    }
+
+    function toggleSave(id) {
+      let savedIDs = getSavedIDs();
+      if (savedIDs.includes(id)) {
+        savedIDs = savedIDs.filter(savedId => savedId !== id);
+      } else {
+        savedIDs.push(id);
+      }
+      localStorage.setItem('savedPKL', JSON.stringify(savedIDs));
+      renderCards();
+    }
+
+    function updateSavedCount(count) {
+      document.getElementById('saved-count').textContent = count;
+    }
+
+    function filterView(view) {
+      currentView = view;
+      renderCards();
+    }
+
+    // RENDER PERTAMA KALI SAAT HALAMAN DIMUAT
+    window.onload = renderCards;
+  </script>
+</body>
+</html>
