@@ -3,29 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RuangMagang.id - Portal Tempat PKL & Magang Siswa SMK</title>
+  <title>RuangMagang.id - Portal Tempat PKL SMK Supercharging</title>
   <style>
-    /* RESET & VARIABEL DASAR */
+    /* RESET & VARIASE CSS MODERN */
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0a58ca;
+      --secondary: #6c757d;
+      --success: #198754;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --bg-light: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-main: #212529;
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background-color: #f4f6f9;
-      color: #333;
-      line-height: 1.6;
+      background-color: var(--bg-light);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    /* NAVBAR RESPONSIF */
+    /* NAVBAR */
     header {
-      background-color: #0d6efd;
+      background: rgba(13, 110, 253, 0.95);
+      backdrop-filter: blur(10px);
       color: #fff;
       padding: 1rem 1.5rem;
       display: flex;
@@ -34,36 +48,36 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .logo {
       font-size: 1.4rem;
-      font-weight: bold;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    .logo span {
-      color: #ffc107;
-    }
+    .logo span { color: var(--warning); }
 
     nav {
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
-    nav a {
+    nav button {
+      background: transparent;
+      border: none;
       color: #fff;
-      text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 0.95rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      transition: background 0.2s;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
 
-    nav a:hover, nav a.active {
-      background: rgba(255, 255, 255, 0.15);
+    nav button:hover, nav button.active {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     /* CONTAINER UTAMA */
@@ -75,102 +89,124 @@
       flex: 1;
     }
 
-    /* HERO SECTION */
+    /* HERO & STATS */
     .hero {
       background: linear-gradient(135deg, #0d6efd, #0b5ed7);
       color: white;
       padding: 2.5rem 1.5rem;
-      border-radius: 12px;
+      border-radius: var(--radius);
       text-align: center;
       margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
     }
 
     .hero h1 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
-      line-height: 1.3;
     }
 
-    .hero p {
-      font-size: 1rem;
-      opacity: 0.9;
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.15);
+      padding: 0.6rem;
+      border-radius: 30px;
     }
 
-    /* PENCARIAN & FILTER RESPONSIF */
-    .search-section {
-      background: #fff;
+    /* SEARCH & FILTER BAR */
+    .filter-card {
+      background: var(--card-bg);
       padding: 1.2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 0.8rem;
       margin-bottom: 1.5rem;
     }
 
-    .search-section input,
-    .search-section select {
+    .filter-card input,
+    .filter-card select {
       width: 100%;
-      padding: 0.8rem 1rem;
-      border: 1px solid #ced4da;
+      padding: 0.75rem 1rem;
+      border: 1px solid #dee2e6;
       border-radius: 8px;
-      font-size: 1rem; /* Mencegah auto-zoom di iOS */
+      font-size: 0.95rem;
       outline: none;
       background-color: #fff;
     }
 
-    .search-section input:focus,
-    .search-section select:focus {
-      border-color: #0d6efd;
+    /* ACTION BAR (TAMBAH & EXPORT) */
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
 
-    /* DAFTAR LOWONGAN (GRID RESPONSIF) */
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); }
+    .btn-outline:hover { background: #e9ecef; }
+
+    /* GRID CARDS */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.2rem;
     }
 
     .card {
-      background: #fff;
-      border-radius: 10px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
       padding: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s;
     }
+
+    .card:hover { transform: translateY(-3px); }
 
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 0.8rem;
-      gap: 0.5rem;
     }
 
     .company-name {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #0d6efd;
-      line-height: 1.3;
+      color: var(--primary);
     }
 
     .bookmark-btn {
       background: none;
       border: none;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       cursor: pointer;
       color: #ccc;
-      padding: 0 0.2rem;
-      line-height: 1;
     }
 
-    .bookmark-btn.active {
-      color: #dc3545;
-    }
+    .bookmark-btn.active { color: var(--danger); }
 
     .badges {
       display: flex;
@@ -181,131 +217,88 @@
 
     .badge {
       background-color: #e7f1ff;
-      color: #0d6efd;
-      padding: 0.3rem 0.6rem;
+      color: var(--primary);
+      padding: 0.25rem 0.6rem;
       border-radius: 6px;
       font-size: 0.78rem;
       font-weight: 600;
     }
 
-    .badge-location {
-      background-color: #f8f9fa;
-      color: #6c757d;
-      border: 1px solid #dee2e6;
-    }
+    .badge-location { background: #f8f9fa; color: var(--secondary); border: 1px solid #dee2e6; }
 
     .card-desc {
       font-size: 0.9rem;
       color: #555;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-footer {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 0.5rem;
       margin-top: auto;
       padding-top: 0.8rem;
       border-top: 1px solid #eee;
-      gap: 0.5rem;
     }
 
-    .quota {
-      font-size: 0.85rem;
-      color: #28a745;
-      font-weight: 600;
-    }
+    .btn-apply { background: #25d366; color: #fff; text-decoration: none; flex: 1; text-align: center; }
+    .btn-detail { background: #e9ecef; color: var(--text-main); }
 
-    .btn-apply {
-      background-color: #25d366;
-      color: #fff;
-      text-decoration: none;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
+    /* MODAL POP-UP */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
       justify-content: center;
-      gap: 0.4rem;
-      transition: background 0.2s;
+      align-items: center;
+      z-index: 1000;
+      padding: 1rem;
     }
 
-    .btn-apply:active {
-      background-color: #1eb857;
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .empty-state {
-      text-align: center;
-      grid-column: 1 / -1;
-      padding: 3rem 1rem;
-      color: #6c757d;
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: #343a40;
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
       color: #fff;
-      font-size: 0.85rem;
-      margin-top: auto;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      display: none;
+      z-index: 2000;
+      box-shadow: var(--shadow);
     }
 
-    /* MEDIA QUERIES (TAMPILAN PONSEL & TABLET) */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 0.8rem 1rem;
-        gap: 0.8rem;
-      }
-
-      nav {
-        width: 100%;
-        justify-content: center;
-      }
-
-      nav a {
-        font-size: 0.88rem;
-        padding: 0.4rem 0.6rem;
-      }
-
-      .hero {
-        padding: 1.8rem 1rem;
-        border-radius: 10px;
-      }
-
-      .hero h1 {
-        font-size: 1.4rem;
-      }
-
-      .hero p {
-        font-size: 0.9rem;
-      }
-
-      .search-section {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
-
-      .grid-container {
-        grid-template-columns: 1fr; /* 1 Kolom penuh di ponsel */
-      }
-
-      .card-footer {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.8rem;
-      }
-
-      .quota {
-        text-align: center;
-      }
-
-      .btn-apply {
-        width: 100%;
-        padding: 0.75rem;
-      }
+      .filter-card { grid-template-columns: 1fr; }
+      .card-footer { flex-direction: column; }
+      .stats-bar { flex-direction: column; gap: 0.3rem; border-radius: 12px; }
     }
   </style>
 </head>
@@ -315,28 +308,32 @@
   <header>
     <div class="logo">RuangMagang<span>.id</span></div>
     <nav>
-      <a id="nav-all" class="active" onclick="filterView('all')">Cari PKL</a>
-      <a id="nav-saved" onclick="filterView('saved')">Simpanan (<span id="saved-count">0</span>)</a>
+      <button id="nav-all" class="active" onclick="setView('all')">Cari PKL</button>
+      <button id="nav-saved" onclick="setView('saved')">Simpanan (<span id="saved-count">0</span>)</button>
     </nav>
   </header>
 
   <div class="container">
     <!-- HERO -->
     <section class="hero">
-      <h1>Temukan Tempat PKL Kelas 11</h1>
-      <p>Cari tempat magang sesuai jurusan SMK Anda dan langsung ajukan via WhatsApp!</p>
+      <h1>Portal Tempat PKL Kelas 11 SMK</h1>
+      <p>Cari, simpan, dan ajukan tempat magang secara instan!</p>
+      <div class="stats-bar">
+        <span>🏢 Total Perusahaan: <strong id="stat-total">0</strong></span>
+        <span>👥 Total Kuota Tersedia: <strong id="stat-kuota">0</strong></span>
+      </div>
     </section>
 
-    <!-- SEARCH & FILTER -->
-    <section class="search-section">
-      <input type="text" id="search-input" placeholder="Cari perusahaan atau kata kunci..." oninput="renderCards()">
+    <!-- SEARCH & FILTER BAR -->
+    <section class="filter-card">
+      <input type="text" id="search-input" placeholder="Cari perusahaan atau keahlian..." oninput="renderCards()">
       <select id="filter-jurusan" onchange="renderCards()">
         <option value="Semua">Semua Jurusan</option>
-        <option value="RPL">RPL (Perangkat Lunak)</option>
-        <option value="TKJ">TKJ (Jaringan)</option>
-        <option value="AKL">AKL (Akuntansi)</option>
-        <option value="OTKP">OTKP (Perkantoran)</option>
-        <option value="TKR">TKR (Otomotif)</option>
+        <option value="RPL">RPL</option>
+        <option value="TKJ">TKJ</option>
+        <option value="AKL">AKL</option>
+        <option value="OTKP">OTKP</option>
+        <option value="TKR">TKR</option>
       </select>
       <select id="filter-kota" onchange="renderCards()">
         <option value="Semua">Semua Kota</option>
@@ -344,155 +341,234 @@
         <option value="Jakarta">Jakarta</option>
         <option value="Surabaya">Surabaya</option>
       </select>
+      <select id="sort-by" onchange="renderCards()">
+        <option value="default">Urutkan: Default</option>
+        <option value="kuota">Kuota Terbanyak</option>
+        <option value="nama">Nama (A-Z)</option>
+      </select>
     </section>
 
-    <!-- CONTAINER CARDS -->
+    <!-- ACTION BAR -->
+    <div class="action-bar">
+      <button class="btn btn-primary" onclick="openModal('add-modal')">➕ Tambah Lowongan PKL</button>
+      <button class="btn btn-outline" onclick="exportData()">📥 Export Data Tersimpan</button>
+    </div>
+
+    <!-- MAIN GRID -->
     <main id="pkl-grid" class="grid-container"></main>
   </div>
 
-  <!-- FOOTER -->
+  <!-- MODAL: TAMBAH LOWONGAN -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Aju Tempat PKL Baru</h3>
+        <button class="close-btn" onclick="closeModal('add-modal')">&times;</button>
+      </div>
+      <form id="add-form" onsubmit="handleAddPKL(event)">
+        <div style="display:flex; flex-direction:column; gap:0.8rem;">
+          <input type="text" id="add-nama" placeholder="Nama Perusahaan" required class="btn-outline" style="padding:0.6rem;">
+          <input type="text" id="add-jurusan" placeholder="Jurusan (pisahkan koma: RPL, TKJ)" required class="btn-outline" style="padding:0.6rem;">
+          <select id="add-kota" required class="btn-outline" style="padding:0.6rem;">
+            <option value="Bandung">Bandung</option>
+            <option value="Jakarta">Jakarta</option>
+            <option value="Surabaya">Surabaya</option>
+          </select>
+          <input type="number" id="add-kuota" placeholder="Kuota Siswa" required class="btn-outline" style="padding:0.6rem;">
+          <input type="text" id="add-wa" placeholder="Nomor WA (contoh: 628123456789)" required class="btn-outline" style="padding:0.6rem;">
+          <textarea id="add-desc" placeholder="Deskripsi Singkat" required class="btn-outline" style="padding:0.6rem; height:80px;"></textarea>
+          <button type="submit" class="btn btn-primary">Publikasikan Lowongan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DETAIL PERUSAHAAN -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="detail-title">Detail Perusahaan</h3>
+        <button class="close-btn" onclick="closeModal('detail-modal')">&times;</button>
+      </div>
+      <div id="detail-body"></div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFIKASI -->
+  <div class="toast" id="toast">Pesan notifikasi</div>
+
   <footer>
-    <p>&copy; 2026 RuangMagang.id - Platform PKL Siswa SMK.</p>
+    <p>&copy; 2026 RuangMagang.id - Engine PKL SMK Paling Overpower via GitHub Pages.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
+  <!-- JAVASCRIPT OVERPOWERED -->
   <script>
-    const pklData = [
-      {
-        id: "pkl-001",
-        namaPerusahaan: "PT Digital Nusantara",
-        jurusan: ["RPL", "TKJ"],
-        kota: "Bandung",
-        deskripsi: "Membantu pengembangan frontend web dan perbaikan jaringan komputer kantor.",
-        kuota: 3,
-        kontakWA: "6281234567890"
-      },
-      {
-        id: "pkl-002",
-        namaPerusahaan: "Klinik Akuntansi Mandiri",
-        jurusan: ["AKL", "OTKP"],
-        kota: "Jakarta",
-        deskripsi: "Pengolahan data keuangan bulanan dan rekapitulasi dokumen administrasi.",
-        kuota: 2,
-        kontakWA: "6289876543210"
-      },
-      {
-        id: "pkl-003",
-        namaPerusahaan: "Bengkel Auto Jaya",
-        jurusan: ["TKR"],
-        kota: "Surabaya",
-        deskripsi: "Praktik servis rutin kendaraan roda empat dan diagnosa kelistrikan mobil.",
-        kuota: 4,
-        kontakWA: "6285678901234"
-      },
-      {
-        id: "pkl-004",
-        namaPerusahaan: "Studio Solusi Media",
-        jurusan: ["RPL"],
-        kota: "Bandung",
-        deskripsi: "Pembuatan landing page sederhana menggunakan HTML, CSS, dan JavaScript.",
-        kuota: 2,
-        kontakWA: "6281122334455"
-      },
-      {
-        id: "pkl-005",
-        namaPerusahaan: "Kantor Notaris Sejahtera",
-        jurusan: ["OTKP", "AKL"],
-        kota: "Jakarta",
-        deskripsi: "Penyusunan arsip digital, surat-menyurat, dan manajemen berkas klien.",
-        kuota: 1,
-        kontakWA: "6287788990011"
-      }
+    // 1. INITIAL DATABASE (LOKAL + DUMMY BUNDLED)
+    const initialData = [
+      { id: "pkl-1", namaPerusahaan: "PT Digital Nusantara", jurusan: ["RPL", "TKJ"], kota: "Bandung", deskripsi: "Pengembangan web dan pemeliharaan jaringan kantor.", kuota: 3, kontakWA: "6281234567890" },
+      { id: "pkl-2", namaPerusahaan: "Klinik Akuntansi Mandiri", jurusan: ["AKL", "OTKP"], kota: "Jakarta", deskripsi: "Pengolahan data keuangan bulanan dan administrasi berkas.", kuota: 2, kontakWA: "6289876543210" },
+      { id: "pkl-3", namaPerusahaan: "Bengkel Auto Jaya", jurusan: ["TKR"], kota: "Surabaya", deskripsi: "Servis rutin kendaraan dan diagnosa kelistrikan mobil.", kuota: 5, kontakWA: "6285678901234" }
     ];
+
+    function getPKLData() {
+      const customData = JSON.parse(localStorage.getItem('customPKL')) || [];
+      return [...initialData, ...customData];
+    }
 
     let currentView = 'all';
 
+    // 2. RENDER ENGINE & FILTERING
     function renderCards() {
       const grid = document.getElementById('pkl-grid');
-      const searchKeyword = document.getElementById('search-input').value.toLowerCase();
-      const selectedJurusan = document.getElementById('filter-jurusan').value;
-      const selectedKota = document.getElementById('filter-kota').value;
-      
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const jurusan = document.getElementById('filter-jurusan').value;
+      const kota = document.getElementById('filter-kota').value;
+      const sortBy = document.getElementById('sort-by').value;
       const savedIDs = getSavedIDs();
-      updateSavedCount(savedIDs.length);
 
-      const filteredData = pklData.filter(item => {
-        const matchKeyword = item.namaPerusahaan.toLowerCase().includes(searchKeyword) || 
-                             item.deskripsi.toLowerCase().includes(searchKeyword);
-        const matchJurusan = selectedJurusan === "Semua" || item.jurusan.includes(selectedJurusan);
-        const matchKota = selectedKota === "Semua" || item.kota === selectedKota;
+      let data = getPKLData();
+
+      // Statistik Update
+      document.getElementById('stat-total').textContent = data.length;
+      document.getElementById('stat-kuota').textContent = data.reduce((acc, curr) => acc + Number(curr.kuota), 0);
+      document.getElementById('saved-count').textContent = savedIDs.length;
+
+      // Filtering
+      data = data.filter(item => {
+        const matchSearch = item.namaPerusahaan.toLowerCase().includes(search) || item.deskripsi.toLowerCase().includes(search);
+        const matchJurusan = jurusan === "Semua" || item.jurusan.includes(jurusan);
+        const matchKota = kota === "Semua" || item.kota === kota;
         const matchSaved = currentView === 'all' || savedIDs.includes(item.id);
-
-        return matchKeyword && matchJurusan && matchKota && matchSaved;
+        return matchSearch && matchJurusan && matchKota && matchSaved;
       });
 
-      if (filteredData.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <h3>Lowongan tidak ditemukan</h3>
-            <p>Coba ubah kata kunci atau filter pencarian Anda.</p>
-          </div>
-        `;
+      // Sorting
+      if (sortBy === 'kuota') data.sort((a, b) => b.kuota - a.kuota);
+      if (sortBy === 'nama') data.sort((a, b) => a.namaPerusahaan.localeCompare(b.namaPerusahaan));
+
+      if (data.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:#6c757d;"><h3>Data Tidak Ditemukan</h3><p>Coba sesuaikan filter atau pencarian Anda.</p></div>`;
         return;
       }
 
-      grid.innerHTML = filteredData.map(item => {
+      grid.innerHTML = data.map(item => {
         const isSaved = savedIDs.includes(item.id);
-        const waMessage = encodeURIComponent(`Halo ${item.namaPerusahaan}, saya siswa kelas 11 SMK yang ingin menanyakan lowongan PKL/Magang untuk jurusan ${item.jurusan.join('/')}. Apakah masih ada kuota yang tersedia?`);
-        
+        const waMsg = encodeURIComponent(`Halo ${item.namaPerusahaan}, saya siswa kelas 11 SMK mau mengajukan PKL untuk jurusan ${item.jurusan.join('/')}. Sisa kuota ${item.kuota}?`);
+
         return `
           <div class="card">
             <div>
               <div class="card-header">
                 <div class="company-name">${item.namaPerusahaan}</div>
-                <button class="bookmark-btn ${isSaved ? 'active' : ''}" onclick="toggleSave('${item.id}')">
-                  ${isSaved ? '♥' : '♡'}
-                </button>
+                <button class="bookmark-btn ${isSaved ? 'active' : ''}" onclick="toggleSave('${item.id}')">${isSaved ? '♥' : '♡'}</button>
               </div>
-              
               <div class="badges">
                 ${item.jurusan.map(j => `<span class="badge">${j}</span>`).join('')}
                 <span class="badge badge-location">📍 ${item.kota}</span>
               </div>
-              
               <p class="card-desc">${item.deskripsi}</p>
             </div>
-
             <div class="card-footer">
-              <span class="quota">Sisa Kuota: ${item.kuota} Orang</span>
-              <a href="https://wa.me/${item.kontakWA}?text=${waMessage}" target="_blank" class="btn-apply">
-                Melamar via WA
-              </a>
+              <button class="btn btn-detail" onclick="openDetail('${item.id}')">Detail</button>
+              <a href="https://wa.me/${item.kontakWA}?text=${waMsg}" target="_blank" class="btn btn-apply">Melamar WA</a>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    function getSavedIDs() {
-      return JSON.parse(localStorage.getItem('savedPKL')) || [];
-    }
+    // 3. BOOKMARK & STORAGE ENGINE
+    function getSavedIDs() { return JSON.parse(localStorage.getItem('savedPKL')) || []; }
 
     function toggleSave(id) {
-      let savedIDs = getSavedIDs();
-      if (savedIDs.includes(id)) {
-        savedIDs = savedIDs.filter(savedId => savedId !== id);
+      let saved = getSavedIDs();
+      if (saved.includes(id)) {
+        saved = saved.filter(i => i !== id);
+        showToast("Lowongan dihapus dari simpanan");
       } else {
-        savedIDs.push(id);
+        saved.push(id);
+        showToast("Lowongan berhasil disimpan!");
       }
-      localStorage.setItem('savedPKL', JSON.stringify(savedIDs));
+      localStorage.setItem('savedPKL', JSON.stringify(saved));
       renderCards();
     }
 
-    function updateSavedCount(count) {
-      document.getElementById('saved-count').textContent = count;
+    // 4. MODAL & DETAIL SYSTEM
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function openDetail(id) {
+      const item = getPKLData().find(p => p.id === id);
+      if(!item) return;
+
+      document.getElementById('detail-title').textContent = item.namaPerusahaan;
+      document.getElementById('detail-body').innerHTML = `
+        <p><strong>Jurusan:</strong> ${item.jurusan.join(', ')}</p>
+        <p><strong>Kota:</strong> ${item.kota}</p>
+        <p><strong>Kuota Tersedia:</strong> ${item.kuota} Orang</p>
+        <p style="margin-top:0.5rem;"><strong>Deskripsi Kerja:</strong><br>${item.deskripsi}</p>
+        <div style="margin-top:1rem; border-radius:8px; overflow:hidden;">
+          <iframe width="100%" height="180" frameborder="0" src="https://maps.google.com/maps?q=${encodeURIComponent(item.namaPerusahaan + ' ' + item.kota)}&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+        <button class="btn btn-primary" style="width:100%; margin-top:1rem;" onclick="sharePKL('${item.namaPerusahaan}')">🔗 Bagikan Tempat Ini</button>
+      `;
+      openModal('detail-modal');
     }
 
-    function filterView(view) {
+    // 5. INPUT LOWONGAN BARU VIA FORM
+    function handleAddPKL(e) {
+      e.preventDefault();
+      const newPKL = {
+        id: "custom-" + Date.now(),
+        namaPerusahaan: document.getElementById('add-nama').value,
+        jurusan: document.getElementById('add-jurusan').value.split(',').map(s => s.trim().toUpperCase()),
+        kota: document.getElementById('add-kota').value,
+        kuota: Number(document.getElementById('add-kuota').value),
+        kontakWA: document.getElementById('add-wa').value,
+        deskripsi: document.getElementById('add-desc').value
+      };
+
+      const customData = JSON.parse(localStorage.getItem('customPKL')) || [];
+      customData.push(newPKL);
+      localStorage.setItem('customPKL', JSON.stringify(customData));
+
+      closeModal('add-modal');
+      document.getElementById('add-form').reset();
+      showToast("Lowongan PKL Baru Berhasil Ditambahkan!");
+      renderCards();
+    }
+
+    // 6. UTILITY: EXPORT, SHARE, TOAST
+    function setView(view) {
       currentView = view;
       document.getElementById('nav-all').classList.toggle('active', view === 'all');
       document.getElementById('nav-saved').classList.toggle('active', view === 'saved');
       renderCards();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 3000);
+    }
+
+    function sharePKL(nama) {
+      if (navigator.share) {
+        navigator.share({ title: 'RuangMagang.id', text: `Info Tempat PKL: ${nama}`, url: window.location.href });
+      } else {
+        showToast("Tautan disalin ke papan klip!");
+      }
+    }
+
+    function exportData() {
+      const savedIDs = getSavedIDs();
+      const savedData = getPKLData().filter(i => savedIDs.includes(i.id));
+      const blob = new Blob([JSON.stringify(savedData, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'daftar-pkl-tersimpan.json';
+      a.click();
     }
 
     window.onload = renderCards;
